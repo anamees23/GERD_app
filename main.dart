@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'GERD App Main Page'),
+      home: const MyHomePage(title: 'GERD App Record Page'),
     );
   }
 }
@@ -48,7 +48,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -85,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const Text(
               'Your current pH measurement is:',
+              style: TextStyle(fontSize: 20),
             ),
             SizedBox(   //Use of SizedBox
               height: 10,
@@ -98,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const Text(
               'What do you want to record?',
+              style: TextStyle(fontSize: 23),
             ),
             SizedBox(   //Use of SizedBox
               height: 20,
@@ -123,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       "Physical Activity",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.white
+                          color: Colors.white, fontSize: 20
                       ),
                     ),
                   ),
@@ -154,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       "Meal intake",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.white
+                          color: Colors.white, fontSize: 20
                       ),
                     ),
                   ),
@@ -186,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       "Unusual Symptoms",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.white
+                          color: Colors.white, fontSize: 20
                       ),
                     ),
                   ),
@@ -197,7 +198,24 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: const Icon(Icons.other_houses_rounded),
+      ),
+      floatingActionButtonLocation:
+      FloatingActionButtonLocation.startTop,
+    );
+  }
+}
+// Second page, still can't access it
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("Second page"),
+      ),
+      body: new Text("Second page"),
     );
   }
 }
