@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,112 +62,120 @@ class _MyHomePageState extends State<MyHomePage> {
               'Your current pH measurement is:',
               style: TextStyle(fontSize: 20),
             ),
-            SizedBox(   //Use of SizedBox
+            SizedBox(
+              //Use of SizedBox
               height: 10,
             ),
             Text(
               '6.2',
               style: Theme.of(context).textTheme.headline4,
             ),
-            SizedBox(   //Use of SizedBox
+            SizedBox(
+              //Use of SizedBox
               height: 40,
             ),
             const Text(
               'What do you want to record?',
               style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ),
-            SizedBox(   //Use of SizedBox
+            SizedBox(
+              //Use of SizedBox
               height: 20,
             ),
             Container(
               height: 50.0,
               child: RaisedButton(
-                onPressed: () {},
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const PhyAct()),
+                  );
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0)),
                 padding: EdgeInsets.all(0.0),
                 child: Ink(
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [Color(0xff374ABE), Color(0xff64B6FF)],
+                      gradient: LinearGradient(
+                        colors: [Color(0xff374ABE), Color(0xff64B6FF)],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
-                      borderRadius: BorderRadius.circular(30.0)
-                  ),
+                      borderRadius: BorderRadius.circular(30.0)),
                   child: Container(
-                    constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                    constraints:
+                        BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
                       "Physical Activity",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 20
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(   //Use of SizedBox
+            SizedBox(
+              //Use of SizedBox
               height: 30,
             ),
             Container(
               height: 50.0,
               child: RaisedButton(
                 onPressed: () {},
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0)),
                 padding: EdgeInsets.all(0.0),
                 child: Ink(
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [Color(0xff379147), Color(0xffa8e4a0)],
+                      gradient: LinearGradient(
+                        colors: [Color(0xff379147), Color(0xffa8e4a0)],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
-                      borderRadius: BorderRadius.circular(30.0)
-                  ),
+                      borderRadius: BorderRadius.circular(30.0)),
                   child: Container(
-                    constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                    constraints:
+                        BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
                       "Meal intake",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 20
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
-
                 ),
               ),
             ),
-            SizedBox(   //Use of SizedBox
+            SizedBox(
+              //Use of SizedBox
               height: 30,
             ),
             Container(
               height: 50.0,
               child: RaisedButton(
                 onPressed: () {},
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0)),
                 padding: EdgeInsets.all(0.0),
                 child: Ink(
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [Color(0xfff453a6), Color(0xffdca797)],
+                      gradient: LinearGradient(
+                        colors: [Color(0xfff453a6), Color(0xffdca797)],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
-                      borderRadius: BorderRadius.circular(30.0)
-                  ),
+                      borderRadius: BorderRadius.circular(30.0)),
                   child: Container(
-                    constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                    constraints:
+                        BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
                       "Unusual Symptoms",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 20
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
-
                 ),
               ),
             ),
@@ -182,11 +191,11 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         child: const Icon(Icons.other_houses_rounded),
       ),
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.startTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 }
+
 // Second page, still can't access it
 class SecondScreen extends StatelessWidget {
   const SecondScreen({Key? key}) : super(key: key);
@@ -203,7 +212,8 @@ class SecondScreen extends StatelessWidget {
               style: TextStyle(fontSize: 30),
               textAlign: TextAlign.center,
             ),
-            SizedBox(   //Use of SizedBox
+            SizedBox(
+              //Use of SizedBox
               height: 30,
             ),
             FlatButton(
@@ -213,19 +223,19 @@ class SecondScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Icon(
-                      Icons.add_chart,
-                      size: 80.0,
+                    Icons.add_chart,
+                    size: 80.0,
                   ),
                   Text("Submit Current Status",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    )
-                  )
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ))
                 ],
               ),
             ),
-            SizedBox(   //Use of SizedBox
+            SizedBox(
+              //Use of SizedBox
               height: 20,
             ),
             FlatButton(
@@ -240,12 +250,12 @@ class SecondScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
-                      )
-                  )
+                      ))
                 ],
               ),
             ),
-            SizedBox(   //Use of SizedBox
+            SizedBox(
+              //Use of SizedBox
               height: 20,
             ),
             FlatButton(
@@ -260,8 +270,7 @@ class SecondScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
-                      )
-                  )
+                      ))
                 ],
               ),
             ),
@@ -275,13 +284,13 @@ class SecondScreen extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const ThirdScreen()),
           );
         },
-        child: const Icon(Icons.perm_device_information_outlined ),
+        child: const Icon(Icons.perm_device_information_outlined),
       ),
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.startTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 }
+
 class ThirdScreen extends StatelessWidget {
   const ThirdScreen({Key? key}) : super(key: key);
 
@@ -293,15 +302,98 @@ class ThirdScreen extends StatelessWidget {
         backgroundColor: Colors.blue,
       ),
       body: Center(
-        child: ElevatedButton(
-    style: ElevatedButton.styleFrom(
-    primary: Colors.blue, shape: StadiumBorder(), fixedSize: const Size(240, 80),),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+        const Text(
+        'Instructions go here',
+          style: TextStyle(fontSize: 20),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          //Use of SizedBox
+          height: 30,
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.blue,
+            shape: StadiumBorder(),
+            fixedSize: const Size(240, 80),
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Go to Home Page', style: TextStyle(
-            fontSize: 20,
-          )),
+          child: const Text('Go to Home Page',
+              style: TextStyle(
+                fontSize: 20,
+              )),
+        ),
+        ]
+      ),
+    ),
+    );
+  }
+}
+class PhyAct extends StatelessWidget {
+  const PhyAct({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Record Physical Activity'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Activity',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the activity',
+                ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
+                'Time of Activity',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+
+              // Input date and time here
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Back',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+            ]
         ),
       ),
     );
