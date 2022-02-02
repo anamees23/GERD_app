@@ -13,15 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Welcome to GERD pH sensor app!',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.green,
       ),
       home: const MyHomePage(title: 'GERD App Record Page'),
@@ -63,23 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
@@ -98,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const Text(
               'What do you want to record?',
-              style: TextStyle(fontSize: 23),
+              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ),
             SizedBox(   //Use of SizedBox
               height: 20,
@@ -199,7 +174,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondScreen()),
+          );
+        },
         child: const Icon(Icons.other_houses_rounded),
       ),
       floatingActionButtonLocation:
@@ -209,13 +189,121 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 // Second page, still can't access it
 class SecondScreen extends StatelessWidget {
+  const SecondScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Second page"),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Welcome to My GERD Tracker!',
+              style: TextStyle(fontSize: 30),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(   //Use of SizedBox
+              height: 30,
+            ),
+            FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                      Icons.add_chart,
+                      size: 80.0,
+                  ),
+                  Text("Submit Current Status",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    )
+                  )
+                ],
+              ),
+            ),
+            SizedBox(   //Use of SizedBox
+              height: 20,
+            ),
+            FlatButton(
+              onPressed: () {},
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.remove_red_eye,
+                    size: 80.0,
+                  ),
+                  Text("View My Data",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      )
+                  )
+                ],
+              ),
+            ),
+            SizedBox(   //Use of SizedBox
+              height: 20,
+            ),
+            FlatButton(
+              onPressed: () {},
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.person,
+                    size: 80.0,
+                  ),
+                  Text("Ask for Help",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      )
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      body: new Text("Second page"),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ThirdScreen()),
+          );
+        },
+        child: const Icon(Icons.perm_device_information_outlined ),
+      ),
+      floatingActionButtonLocation:
+      FloatingActionButtonLocation.startTop,
+    );
+  }
+}
+class ThirdScreen extends StatelessWidget {
+  const ThirdScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Instructions'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: ElevatedButton(
+    style: ElevatedButton.styleFrom(
+    primary: Colors.blue, shape: StadiumBorder(), fixedSize: const Size(240, 80),),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go to Home Page', style: TextStyle(
+            fontSize: 20,
+          )),
+        ),
+      ),
     );
   }
 }
