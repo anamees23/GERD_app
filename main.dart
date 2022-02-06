@@ -218,7 +218,8 @@ class SecondScreen extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () {
-                Navigator.pop(context);
+                // go back to "home page", the appropriate one
+                Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
               },
               child: Column(
                 children: <Widget>[
@@ -259,7 +260,12 @@ class SecondScreen extends StatelessWidget {
               height: 20,
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const getHelp()),
+                );
+              },
               child: Column(
                 children: <Widget>[
                   Icon(
@@ -290,6 +296,92 @@ class SecondScreen extends StatelessWidget {
     );
   }
 }
+class getHelp extends StatelessWidget {
+  const getHelp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Ask for Help'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Send a message to the doctor',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the message',
+                ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
+                'Click to add a photo',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+
+              // Code to add the photo
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllSet()),
+                  );
+                },
+                child: const Text('Submit',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Back',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+            ]
+        ),
+      ),
+    );
+  }
+}
 
 class ThirdScreen extends StatelessWidget {
   const ThirdScreen({Key? key}) : super(key: key);
@@ -305,8 +397,8 @@ class ThirdScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-        const Text(
-        'Instructions go here',
+            const Text(
+        'To submit your activity status, meal status or to record any unusual symptoms, click on the "Submit Current Status" icon on the home page.',
           style: TextStyle(fontSize: 20),
           textAlign: TextAlign.center,
         ),
@@ -378,7 +470,27 @@ class PhyAct extends StatelessWidget {
               ),
 
               // Input date and time here
-
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllSet()),
+                  );
+                },
+                child: const Text('Submit',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
@@ -387,6 +499,54 @@ class PhyAct extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
+                },
+                child: const Text('Back',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+            ]
+        ),
+      ),
+    );
+  }
+}
+class AllSet extends StatelessWidget {
+  const AllSet({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('All set!'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'All set! Your information was recorded',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+
+              // Code to view the data submitted
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SecondScreen()),
+                  );
                 },
                 child: const Text('Back',
                     style: TextStyle(
