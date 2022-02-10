@@ -122,7 +122,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               height: 50.0,
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MealInt()),
+                  );
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
                 padding: EdgeInsets.all(0.0),
@@ -154,7 +159,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               height: 50.0,
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Sympt()),
+                  );
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
                 padding: EdgeInsets.all(0.0),
@@ -461,6 +471,176 @@ class PhyAct extends StatelessWidget {
               ),
               const Text(
                 'Time of Activity',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+
+              // Input date and time here
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllSet()),
+                  );
+                },
+                child: const Text('Submit',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Back',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+            ]
+        ),
+      ),
+    );
+  }
+}
+class MealInt extends StatelessWidget {
+  const MealInt({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Record Meal Intake'),
+        backgroundColor: Colors.green,
+      ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Meal',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the meal',
+                ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
+                'Time of Meal',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+
+              // Input date and time here
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllSet()),
+                  );
+                },
+                child: const Text('Submit',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Back',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+            ]
+        ),
+      ),
+    );
+  }
+}
+class Sympt extends StatelessWidget {
+  const Sympt({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Record Symptoms'),
+        backgroundColor: Colors.pink,
+      ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Symptom',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the symptom',
+                ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
+                'Time of start',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
