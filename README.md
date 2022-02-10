@@ -1,4 +1,4 @@
-# gerd
+# GERD App
 
 ## Getting Started
 
