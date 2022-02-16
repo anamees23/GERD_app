@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:async';
+// to store data locally, such as login credentials
+// SharedPreferences can be used to store critical data such as passwords,
+// tokens, and complex relational data.
+
+//import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,13 +14,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Welcome to GERD pH sensor app!',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.orange,
       ),
       home: const MyHomePage(title: 'GERD App Record Page'),
     );
@@ -38,6 +44,109 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
+/* one-time pin page
+class PinScreen extends StatefulWidget {
+  @override
+  _PinScreenState createState() => _PinScreenState();
+}
+
+class _PinScreenState extends State<PinScreen> {
+  final PinDelay = 2;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadWidget();
+  }
+
+  _loadWidget() async {
+    var _duration = Duration(seconds: PinDelay);
+    return Timer(_duration, checkFirstSeen);
+  }
+
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _introSeen = (prefs.getBool('intro_seen') ?? false);
+
+    Navigator.pop(context);
+    if (_introSeen) {
+      Navigator.pushNamed(context, Routing.HomeViewRoute);
+    } else {
+      await prefs.setBool('intro_seen', true);
+      Navigator.pushNamed(context, Routing.IntroViewRoute);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Input your information'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Full Name:',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your name',
+                ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
+                'Pin number',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your PIN number',
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SecondScreen()),
+                  );
+                },
+                child: const Text('Continue',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+            ]
+        ),
+      ),
+    );
+  }
+}
+*/ //end of one-time pin page
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
@@ -206,7 +315,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// Second page, still can't access it
 class SecondScreen extends StatelessWidget {
   const SecondScreen({Key? key}) : super(key: key);
 
@@ -567,7 +675,7 @@ class MealInt extends StatelessWidget {
               // Input date and time here
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  primary: Colors.green,
                   shape: StadiumBorder(),
                   fixedSize: const Size(240, 80),
                 ),
@@ -588,7 +696,7 @@ class MealInt extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  primary: Colors.green,
                   shape: StadiumBorder(),
                   fixedSize: const Size(240, 80),
                 ),
@@ -652,7 +760,7 @@ class Sympt extends StatelessWidget {
               // Input date and time here
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  primary: Colors.pink,
                   shape: StadiumBorder(),
                   fixedSize: const Size(240, 80),
                 ),
@@ -673,7 +781,7 @@ class Sympt extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  primary: Colors.pink,
                   shape: StadiumBorder(),
                   fixedSize: const Size(240, 80),
                 ),
