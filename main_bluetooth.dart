@@ -52,15 +52,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _pH = 0.0;
+  var _pH1 = 0.0;
+  var _pH2 = 0.0;
   bool _isButtonDisabled = false;
-  DateTime currentDate = DateTime.now();
+  DateTime currentDate1 = DateTime.now();
+  DateTime currentDate2 = DateTime.now();
 
   @override
   void initState() {
     _isButtonDisabled = false;
     super.initState();
-    const oneSec = const Duration(seconds: 1);
+    const oneSec = const Duration(seconds: 2);
     Timer _timer = new Timer.periodic(
         oneSec, (timer) {
           if (_isButtonDisabled == true) {
@@ -68,7 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
           }
       var rng = Random();
       setState((){
-        _pH = rng.nextInt(140)/10.0;
+        _pH1 = rng.nextInt(140)/10.0;
+        _pH2 = rng.nextInt(140)/10.0;
         _timeSync();
       });
     });
@@ -82,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen
-      currentDate = DateTime.now(); //DateTime
+      currentDate2 = DateTime.now();
+      currentDate1 = currentDate2.add(const Duration(seconds: -1)); //DateTime
     });
   }
 
@@ -120,17 +124,31 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Spacer(flex: 1),
             const Text(
-              'pH value:',
+              'first pH value:',
             ),
             Text(
-              '$_pH',
+              '$_pH1',
               style: Theme.of(context).textTheme.headline4,
             ),
             Text(
-                ('current time: ' + '$currentDate'),
+                ('first time: ' + '$currentDate1'),
             ),
-            _buildCounterButton()
+            Spacer(flex: 1),
+            const Text(
+              'second pH value:',
+            ),
+            Text(
+              '$_pH2',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Text(
+              ('second time: ' + '$currentDate2'),
+            ),
+            Spacer(flex: 1),
+            _buildCounterButton(),
+            Spacer(flex: 1)
           ],
         ),
       ),
@@ -145,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildCounterButton() {
     return new RaisedButton(
       child: new Text(
-          _isButtonDisabled ? "DATA OFF" : "DATA ON"
+          _isButtonDisabled ? "DATA GENERATION OFF" : "DATA GENERATION ON"
       ),
       onPressed: () {
         setState(() {
