@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
+//import 'LocalNotificationsScreen.dart'
+//import 'package:intl/intl.dart';
+
+// Choice #1 for notifications
+//import 'package:awesome_notifications/awesome_notifications.dart';
 // to store data locally, such as login credentials
 // SharedPreferences can be used to store critical data such as passwords,
 // tokens, and complex relational data.
 
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,11 +24,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      //debugShowCheckedModeBanner: false,
+      //home: LocalNotificationScreen(),
       title: 'Welcome to GERD pH sensor app!',
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: const MyHomePage(title: 'GERD App Record Page'),
+      home: const PinScreen(),
     );
   }
 }
@@ -45,8 +53,9 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-/* one-time pin page
+// one-time pin page
 class PinScreen extends StatefulWidget {
+  const PinScreen({Key? key}) : super(key: key);
   @override
   _PinScreenState createState() => _PinScreenState();
 }
@@ -68,13 +77,16 @@ class _PinScreenState extends State<PinScreen> {
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _introSeen = (prefs.getBool('intro_seen') ?? false);
+    //print('oi');
+    print(_introSeen);
 
-    Navigator.pop(context);
     if (_introSeen) {
-      Navigator.pushNamed(context, Routing.HomeViewRoute);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Measuring')),
+      );
     } else {
       await prefs.setBool('intro_seen', true);
-      Navigator.pushNamed(context, Routing.IntroViewRoute);
     }
   }
 
@@ -90,7 +102,7 @@ class _PinScreenState extends State<PinScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'Full Name:',
+                'Full Name',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
@@ -123,6 +135,10 @@ class _PinScreenState extends State<PinScreen> {
                   hintText: 'Enter your PIN number',
                 ),
               ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
@@ -146,7 +162,7 @@ class _PinScreenState extends State<PinScreen> {
     );
   }
 }
-*/ //end of one-time pin page
+ //end of one-time pin page
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
@@ -588,6 +604,11 @@ class PhyAct extends StatelessWidget {
               ),
 
               // Input date and time here
+
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
