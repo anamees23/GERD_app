@@ -3,159 +3,159 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/widgets.dart';
 
-void main() async {
-// Avoid errors caused by flutter upgrade.
-// Importing 'package:flutter/widgets.dart' is required.
-  WidgetsFlutterBinding.ensureInitialized();
-// Open the database and store the reference.
-  final database = openDatabase(
-    // Set the path to the database. Note: Using the `join` function from the
-    // `path` package is best practice to ensure the path is correctly
-    // constructed for each platform.
-    join(await getDatabasesPath(), 'gerd_database.db'),
+// void main() async {
+// // Avoid errors caused by flutter upgrade.
+// // Importing 'package:flutter/widgets.dart' is required.
+//   WidgetsFlutterBinding.ensureInitialized();
+// // Open the database and store the reference.
+//   final database = openDatabase(
+//     // Set the path to the database. Note: Using the `join` function from the
+//     // `path` package is best practice to ensure the path is correctly
+//     // constructed for each platform.
+//     join(await getDatabasesPath(), 'gerd_database.db'),
 
-    // When the database is first created, create a table to store database.
-    onCreate: (db, version) async {
-      // Run the CREATE TABLE statement on the database.
-      await db.execute(
-        'CREATE TABLE patient_info(first_name TEXT, last_name TEXT, mhr_number INT PRIMARY KEY, time_stamp DATETIME NOT NULL)',
-      );
-      await db.execute(
-        'CREATE TABLE doctor_info(email_id TEXT PRIMARY KEY, time_stamp DATETIME NOT NULL)',
-      );
-      await db.execute(
-        'CREATE TABLE ph_data(ph_value FLOAT NOT NULL, time_stamp DATETIME PRIMARY KEY)',
-      );
-      await db.execute(
-        'CREATE TABLE physical_activity(activity_status TEXT, start_time DATETIME PRIMARY KEY, end_time DATETIME NOT NULL, time_stamp DATETIME NOT NULL)',
-      );
-      await db.execute(
-        'CREATE TABLE meal_status(food TEXT, drink TEXT, start_time DATETIME PRIMARY KEY, end_time DATETIME NOT NULL, time_stamp DATETIME NOT NULL)',
-      );
-      await db.execute(
-        'CREATE TABLE symptoms_status(symptom TEXT, start_time DATETIME PRIMARY KEY, end_time DATETIME, time_stamp DATETIME NOT NULL)',
-      );
-      await db.execute(
-        'CREATE TABLE messages(message TEXT, time_stamp DATETIME PRIMARY KEY)',
-      );
-    },
-    // Set the version. This executes the onCreate function and provides a
-    // path to perform database upgrades and downgrades.
-    version: 1,
-  );
+//     // When the database is first created, create a table to store database.
+//     onCreate: (db, version) async {
+//       // Run the CREATE TABLE statement on the database.
+//       await db.execute(
+//         'CREATE TABLE patient_info(first_name TEXT, last_name TEXT, mhr_number INT PRIMARY KEY, time_stamp DATETIME NOT NULL)',
+//       );
+//       await db.execute(
+//         'CREATE TABLE doctor_info(email_id TEXT PRIMARY KEY, time_stamp DATETIME NOT NULL)',
+//       );
+//       await db.execute(
+//         'CREATE TABLE ph_data(ph_value FLOAT NOT NULL, time_stamp DATETIME PRIMARY KEY)',
+//       );
+//       await db.execute(
+//         'CREATE TABLE physical_activity(activity_status TEXT, start_time DATETIME PRIMARY KEY, end_time DATETIME NOT NULL, time_stamp DATETIME NOT NULL)',
+//       );
+//       await db.execute(
+//         'CREATE TABLE meal_status(food TEXT, drink TEXT, start_time DATETIME PRIMARY KEY, end_time DATETIME NOT NULL, time_stamp DATETIME NOT NULL)',
+//       );
+//       await db.execute(
+//         'CREATE TABLE symptoms_status(symptom TEXT, start_time DATETIME PRIMARY KEY, end_time DATETIME, time_stamp DATETIME NOT NULL)',
+//       );
+//       await db.execute(
+//         'CREATE TABLE messages(message TEXT, time_stamp DATETIME PRIMARY KEY)',
+//       );
+//     },
+//     // Set the version. This executes the onCreate function and provides a
+//     // path to perform database upgrades and downgrades.
+//     version: 1,
+//   );
 
-  // Define a function that inserts patient info into the database
-  Future<void> insert_patient(patient_info patient) async {
-    // Get a reference to the database.
-    final db = await database;
+//   // Define a function that inserts patient info into the database
+//   Future<void> insert_patient(patient_info patient) async {
+//     // Get a reference to the database.
+//     final db = await database;
 
-    // Insert the patient info into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same patient is inserted twice.
-    //
-    // In this case, replace any previous data.
-    await db.insert(
-      'patient_info',
-      patient.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+//     // Insert the patient info into the correct table. You might also specify the
+//     // `conflictAlgorithm` to use in case the same patient is inserted twice.
+//     //
+//     // In this case, replace any previous data.
+//     await db.insert(
+//       'patient_info',
+//       patient.toMap(),
+//       conflictAlgorithm: ConflictAlgorithm.replace,
+//     );
+//   }
 
-  // Define a function that inserts doctor info into the database
-  Future<void> insert_doctor(doctor_info doctor) async {
-    // Get a reference to the database.
-    final db = await database;
+//   // Define a function that inserts doctor info into the database
+//   Future<void> insert_doctor(doctor_info doctor) async {
+//     // Get a reference to the database.
+//     final db = await database;
 
-    // Insert the doctor info into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same doctor is inserted twice.
-    //
-    // In this case, replace any previous data.
-    await db.insert(
-      'doctor_info',
-      doctor.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+//     // Insert the doctor info into the correct table. You might also specify the
+//     // `conflictAlgorithm` to use in case the same doctor is inserted twice.
+//     //
+//     // In this case, replace any previous data.
+//     await db.insert(
+//       'doctor_info',
+//       doctor.toMap(),
+//       conflictAlgorithm: ConflictAlgorithm.replace,
+//     );
+//   }
 
-  // Define a function that inserts pH data into the database
-  Future<void> insert_ph_data(ph_data data) async {
-    // Get a reference to the database.
-    final db = await database;
+//   // Define a function that inserts pH data into the database
+//   Future<void> insert_ph_data(ph_data data) async {
+//     // Get a reference to the database.
+//     final db = await database;
 
-    // Insert the pH data into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same timestamp is inserted twice.
-    //
-    // In this case, replace any previous data.
-    await db.insert(
-      'ph_data',
-      data.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+//     // Insert the pH data into the correct table. You might also specify the
+//     // `conflictAlgorithm` to use in case the same timestamp is inserted twice.
+//     //
+//     // In this case, replace any previous data.
+//     await db.insert(
+//       'ph_data',
+//       data.toMap(),
+//       conflictAlgorithm: ConflictAlgorithm.replace,
+//     );
+//   }
 
-  // Define a function that inserts physical activity info into the database
-  Future<void> insert_physical_activity(physical_activity activity) async {
-    // Get a reference to the database.
-    final db = await database;
+//   // Define a function that inserts physical activity info into the database
+//   Future<void> insert_physical_activity(physical_activity activity) async {
+//     // Get a reference to the database.
+//     final db = await database;
 
-    // Insert the physical activity info into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same data is inserted twice.
-    //
-    // In this case, replace any previous data.
-    await db.insert(
-      'physical_activity',
-      activity.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+//     // Insert the physical activity info into the correct table. You might also specify the
+//     // `conflictAlgorithm` to use in case the same data is inserted twice.
+//     //
+//     // In this case, replace any previous data.
+//     await db.insert(
+//       'physical_activity',
+//       activity.toMap(),
+//       conflictAlgorithm: ConflictAlgorithm.replace,
+//     );
+//   }
 
-  // Define a function that inserts meal info into the database
-  Future<void> insert_meal(meal_status meal) async {
-    // Get a reference to the database.
-    final db = await database;
+//   // Define a function that inserts meal info into the database
+//   Future<void> insert_meal(meal_status meal) async {
+//     // Get a reference to the database.
+//     final db = await database;
 
-    // Insert the meal info into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same meal is inserted twice.
-    //
-    // In this case, replace any previous data.
-    await db.insert(
-      'meal_status',
-      meal.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+//     // Insert the meal info into the correct table. You might also specify the
+//     // `conflictAlgorithm` to use in case the same meal is inserted twice.
+//     //
+//     // In this case, replace any previous data.
+//     await db.insert(
+//       'meal_status',
+//       meal.toMap(),
+//       conflictAlgorithm: ConflictAlgorithm.replace,
+//     );
+//   }
 
-  // Define a function that inserts symptom info into the database
-  Future<void> insert_symptom(symptoms_status symptom) async {
-    // Get a reference to the database.
-    final db = await database;
+//   // Define a function that inserts symptom info into the database
+//   Future<void> insert_symptom(symptoms_status symptom) async {
+//     // Get a reference to the database.
+//     final db = await database;
 
-    // Insert the symptom info into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same data is inserted twice.
-    //
-    // In this case, replace any previous data.
-    await db.insert(
-      'symptoms_status',
-      symptom.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+//     // Insert the symptom info into the correct table. You might also specify the
+//     // `conflictAlgorithm` to use in case the same data is inserted twice.
+//     //
+//     // In this case, replace any previous data.
+//     await db.insert(
+//       'symptoms_status',
+//       symptom.toMap(),
+//       conflictAlgorithm: ConflictAlgorithm.replace,
+//     );
+//   }
 
-  // Define a function that inserts a message into the database
-  Future<void> insert_message(messages message) async {
-    // Get a reference to the database.
-    final db = await database;
+//   // Define a function that inserts a message into the database
+//   Future<void> insert_message(messages message) async {
+//     // Get a reference to the database.
+//     final db = await database;
 
-    // Insert the message into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same data is inserted twice.
-    //
-    // In this case, replace any previous data.
-    await db.insert(
-      'messages',
-      message.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
-}
+//     // Insert the message into the correct table. You might also specify the
+//     // `conflictAlgorithm` to use in case the same data is inserted twice.
+//     //
+//     // In this case, replace any previous data.
+//     await db.insert(
+//       'messages',
+//       message.toMap(),
+//       conflictAlgorithm: ConflictAlgorithm.replace,
+//     );
+//   }
+// }
 
 class patient_info {
   final String first_name;
@@ -216,20 +216,44 @@ class doctor_info {
 }
 
 class ph_data {
-  final double ph_value;
-  final DateTime time_stamp;
+  double ph_value = 0.00;
+  DateTime time_stamp = DateTime.now();
 
-  const ph_data({
-    required this.ph_value,
-    required this.time_stamp,
-  });
+  ph_data(double ph_value, DateTime time_stamp) {
+    this.ph_value = ph_value;
+    this.time_stamp = time_stamp;
+  }
 
   // Convert ph_data into a Map. The keys must correspond to the names of the
   // columns in the database.
   Map<String, dynamic> toMap() {
     return {
-      'pH Value': ph_value,
-      'Time recorded': time_stamp,
+      'ph_value': ph_value,
+      'time_stamp': time_stamp,
+    };
+  }
+
+  // // Define a function that inserts pH data into the database
+  // Future<void>
+  void insert_ph_data(ph_data data) async {
+    // Get a reference to the database.
+
+    final db = openDatabase(
+        // Set the path to the database. Note: Using the `join` function from the
+        // `path` package is best practice to ensure the path is correctly
+        // constructed for each platform.
+        join(await getDatabasesPath(), 'gerd_database.db'));
+    onCreate:
+    (db, version) async {
+      await db.execute(
+        'CREATE TABLE ph_data(ph_value FLOAT NOT NULL, time_stamp DATETIME PRIMARY KEY)',
+      );
+
+      // Insert the pH data into the correct table. You might also specify the
+      // `conflictAlgorithm` to use in case the same timestamp is inserted twice.
+      //
+      // In this case, replace any previous data.
+      await db.insert('ph_data', data.toMap());
     };
   }
 
