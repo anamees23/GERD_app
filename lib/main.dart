@@ -353,7 +353,15 @@ class SecondScreen extends StatelessWidget {
             FlatButton(
               onPressed: () {
                 // go back to "home page", the appropriate one
-                Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
+                //Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Measuring')),
+                );
+
+                
+
+
               },
               child: Column(
                 children: <Widget>[
