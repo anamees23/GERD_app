@@ -121,6 +121,44 @@ class _PinScreenState extends State<PinScreen> {
                 height: 30,
               ),
               const Text(
+                'Medical Health Record Number',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your MHR number',
+                ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
+                'Doctor email',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Enter your doctor's email",
+                ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
                 'Pin number',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
