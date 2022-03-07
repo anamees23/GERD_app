@@ -249,10 +249,11 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 50.0,
               child: RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const PhyAct()),
-                  );
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PhyAct()));
+                  //Navigator.push(
+                    //context,
+                    //MaterialPageRoute(builder: (context) => const PhyAct()),
+                  //);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
@@ -397,7 +398,7 @@ class SecondScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Measuring')),
                 );
 
-                
+
 
 
               },
@@ -606,9 +607,15 @@ class ThirdScreen extends StatelessWidget {
     );
   }
 }
-class PhyAct extends StatelessWidget {
-  const PhyAct({Key? key}) : super(key: key);
+class PhyAct extends StatefulWidget {
 
+
+  @override
+  State<PhyAct> createState() => _PhyAct();
+}
+
+class _PhyAct extends State<PhyAct> {
+  String? _value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -628,6 +635,32 @@ class PhyAct extends StatelessWidget {
               SizedBox(
                 //Use of SizedBox
                 height: 30,
+              ),
+              //Dropdown
+              DropdownButton<String>(
+                value: _value,
+                hint: Text('Please select'),
+                onChanged: (value) {
+                  print(value);
+                  setState(() {
+                    _value = value;
+                  });
+                },
+                items: ['Walking', 'Standing', 'Sleeping', 'Laying Down', 'Exercising', 'Other (please specify)'].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
+                'If other:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.left,
               ),
               TextField(
                 decoration: InputDecoration(
