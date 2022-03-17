@@ -110,12 +110,15 @@ class _PinScreenState extends State<PinScreen> {
                 //Use of SizedBox
                 height: 30,
               ),
-              TextField(
+        Container(
+            width: 500.0,
+            child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter your name',
                 ),
               ),
+        ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
@@ -129,12 +132,15 @@ class _PinScreenState extends State<PinScreen> {
                 //Use of SizedBox
                 height: 30,
               ),
-              TextField(
+        Container(
+            width: 500.0,
+            child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter your MHR number',
                 ),
               ),
+        ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
@@ -148,12 +154,15 @@ class _PinScreenState extends State<PinScreen> {
                 //Use of SizedBox
                 height: 30,
               ),
-              TextField(
+        Container(
+            width: 500.0,
+            child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "Enter your doctor's email",
                 ),
               ),
+        ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
@@ -167,12 +176,15 @@ class _PinScreenState extends State<PinScreen> {
                 //Use of SizedBox
                 height: 30,
               ),
-              TextField(
+        Container(
+            width: 500.0,
+            child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter your PIN number',
                 ),
               ),
+        ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
@@ -500,12 +512,15 @@ class getHelp extends StatelessWidget {
                 //Use of SizedBox
                 height: 30,
               ),
-              TextField(
+        Container(
+            width: 500.0,
+            child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter the message',
                 ),
               ),
+        ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
@@ -662,12 +677,15 @@ class _PhyAct extends State<PhyAct> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.left,
               ),
-              TextField(
+        Container(
+            width: 500.0,
+            child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter the activity',
                 ),
               ),
+        ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
@@ -752,12 +770,15 @@ class MealInt extends StatelessWidget {
                 //Use of SizedBox
                 height: 30,
               ),
-              TextField(
+        Container(
+            width: 500.0,
+            child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter the meal',
                 ),
               ),
+        ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
@@ -829,7 +850,7 @@ class Sympt extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'Symptom',
+                'What are you feeling?',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
@@ -837,11 +858,44 @@ class Sympt extends StatelessWidget {
                 //Use of SizedBox
                 height: 30,
               ),
-              TextField(
+        Container(
+            width: 500.0,
+            child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter the symptom',
                 ),
+              ),
+        ),
+              SizedBox(
+                //Use of SizedBox
+                height: 20,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(320, 50),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ExplainSympts()),
+                  );
+                },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('What are unusual symptoms?   ',
+                    style: TextStyle(
+                      fontSize: 13,
+                    )),
+        Icon( // <-- Icon
+          Icons.help,
+          size: 24.0,
+        ),
+        ],
+              ),
               ),
               SizedBox(
                 //Use of SizedBox
@@ -892,6 +946,103 @@ class Sympt extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                     )),
+              ),
+            ]
+        ),
+      ),
+    );
+  }
+}
+class ExplainSympts extends StatelessWidget {
+  const ExplainSympts({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('What are unusual symptoms?'),
+        backgroundColor: Colors.red,
+      ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                '- Heartburn (burning sensation in your chest)',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 8,
+              ),
+              const Text(
+                '- Chest pain',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 8,
+              ),
+              const Text(
+                '- Difficulty swallowing',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 8,
+              ),
+              const Text(
+                '- Feeling of lump in throat',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 8,
+              ),
+              const Text(
+                '- Regurgitation (food or sour liquid)',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 8,
+              ),
+              const Text(
+                '- Vomiting',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 8,
+              ),
+              const Text(
+                '- Sore throat and hoarseness',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Go back and record your symptoms',
+                    style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ]
         ),
