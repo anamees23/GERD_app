@@ -384,12 +384,7 @@ class SecondScreen extends StatelessWidget {
               height: 20,
             ),
             FlatButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DataView()),
-                );
-              },
+              onPressed: () {},
               child: Column(
                 children: <Widget>[
                   Icon(
@@ -530,119 +525,6 @@ class getHelp extends StatelessWidget {
       ),
     );
   }
-}
-
-class DataView extends StatelessWidget {
-  const DataView ({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('View My Data'),
-        backgroundColor: Colors.blue,
-      ),
-      body: Center(
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-        SizedBox(
-        //Use of SizedBox
-        height: 30,
-      ),
-      Container(
-        height: 50.0,
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const MealInt()),
-            );
-          },
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(80.0)),
-          padding: EdgeInsets.all(0.0),
-          child: Ink(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFF57F17), Color(0xFFFBC02D)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: BorderRadius.circular(30.0)),
-            child: Container(
-              constraints:
-              BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-              alignment: Alignment.center,
-              child: Text(
-                "Show me my pH data graph",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-            ),
-          ),
-        ),
-      ),
-        SizedBox(
-          //Use of SizedBox
-          height: 30,
-        ),
-        Container(
-          height: 50.0,
-          child: RaisedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Sympt()),
-              );
-            },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(80.0)),
-            padding: EdgeInsets.all(0.0),
-            child: Ink(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF6A1B9A), Color(0xFFCE93D8)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                  borderRadius: BorderRadius.circular(30.0)),
-              child: Container(
-                constraints:
-                BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                alignment: Alignment.center,
-                child: Text(
-                  "View my current status submissions",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 100),
-        ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
-                  shape: StadiumBorder(),
-                  fixedSize: const Size(240, 80),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Back',
-                    style: TextStyle(
-                      fontSize: 20,
-                    )),
-              ),
-        ],
-    ),
-    ),
-    );
-  }
-
 }
 
 class ThirdScreen extends StatelessWidget {
@@ -1017,7 +899,7 @@ class AllSet extends StatelessWidget {
     Widget build(BuildContext context) {
     return Scaffold(
     appBar: AppBar(
-    title: Text('Select Date and Time'),
+    title: Text('DateTime Picker'),
     ),
     body: Padding(
     padding: const EdgeInsets.all(16.0),
@@ -1144,30 +1026,6 @@ class AllSet extends StatelessWidget {
     ),
     color: Colors.white,
     ),
-      Padding(
-        padding: EdgeInsets.only(top: 100),
-      ),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.red,
-          shape: StadiumBorder(),
-          fixedSize: const Size(240, 80),
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AllSet()),
-          );
-        },
-        child: const Text('or Currently Doing!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20,
-            )),
-      ),
-      Padding(
-        padding: EdgeInsets.only(top: 100),
-      ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
@@ -1214,7 +1072,7 @@ class _HomeScreenGreenState extends State<HomeScreenGreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Date and Time'),
+        title: Text('DateTime Picker'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -1340,30 +1198,6 @@ class _HomeScreenGreenState extends State<HomeScreenGreen> {
                   ),
                 ),
                 color: Colors.white,
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 100),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                  shape: StadiumBorder(),
-                  fixedSize: const Size(240, 80),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AllSet()),
-                  );
-                },
-                child: const Text('or Currently Eating/Drinking!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                    )),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 100),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -1411,7 +1245,7 @@ class _HomeScreenPinkState extends State<HomeScreenPink> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Date and Time'),
+        title: Text('DateTime Picker'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -1537,30 +1371,6 @@ class _HomeScreenPinkState extends State<HomeScreenPink> {
                   ),
                 ),
                 color: Colors.white,
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 100),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                  shape: StadiumBorder(),
-                  fixedSize: const Size(240, 80),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AllSet()),
-                  );
-                },
-                child: const Text('or Currently Experiencing!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                    )),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 100),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
