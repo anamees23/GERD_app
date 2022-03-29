@@ -11,9 +11,44 @@ import 'dart:async';
 // tokens, and complex relational data.
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'firebase_options.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
 
-void main() {
+  print("Handling a background message: ${message.messageId}");
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  // subscribe to topic on each app start-up
+  await messaging.subscribeToTopic('test');
+  print('User granted permission: ${settings.authorizationStatus}');
   runApp(MyApp());
 }
 
@@ -48,6 +83,7 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -111,7 +147,7 @@ class _PinScreenState extends State<PinScreen> {
                 height: 30,
               ),
         Container(
-            width: 500.0,
+            width: 350.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -133,7 +169,7 @@ class _PinScreenState extends State<PinScreen> {
                 height: 30,
               ),
         Container(
-            width: 500.0,
+            width: 350.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -155,7 +191,7 @@ class _PinScreenState extends State<PinScreen> {
                 height: 30,
               ),
         Container(
-            width: 500.0,
+            width: 350.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -177,7 +213,7 @@ class _PinScreenState extends State<PinScreen> {
                 height: 30,
               ),
         Container(
-            width: 500.0,
+            width: 350.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -215,6 +251,23 @@ class _PinScreenState extends State<PinScreen> {
  //end of one-time pin page
 
 class _MyHomePageState extends State<MyHomePage> {
+  String messageTitle = "Empty";
+  String notificationAlert = "alert";
+
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+
+
+
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -233,6 +286,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(
+              notificationAlert,
+            ),
+            Text(
+              messageTitle,
+              style: Theme.of(context).textTheme.headline4,
+            ),
             const Text(
               'Your current pH measurement is:',
               style: TextStyle(fontSize: 20),
