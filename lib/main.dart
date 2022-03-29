@@ -98,7 +98,9 @@ class PinScreen extends StatefulWidget {
 
 class _PinScreenState extends State<PinScreen> {
   final PinDelay = 2;
-  String name = "No Value";
+  //First and last
+  String firstname = "No Value";
+  String lastname = "No Value";
   String mhr = "No Value";
   String email = "No Value";
   String pin = "No Value";
@@ -142,22 +144,22 @@ class _PinScreenState extends State<PinScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'Full Name',
+                'First Name',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 10,
               ),
         Container(
             width: 350.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Enter your name',
+                  hintText: 'Enter your first name',
                 ),
-              onChanged: (value) => name = value,
+              onChanged: (value) => firstname = value,
               ),
         ),
               SizedBox(
@@ -166,13 +168,36 @@ class _PinScreenState extends State<PinScreen> {
               ),
               //Text(text),
               const Text(
+                'Last Name',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 10,
+              ),
+              Container(
+                width: 350.0,
+                child:TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your last name',
+                  ),
+                  onChanged: (value) => lastname = value,
+                ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 30,
+              ),
+              const Text(
                 'Medical Health Record Number',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 10,
               ),
         Container(
             width: 350.0,
@@ -195,7 +220,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 10,
               ),
         Container(
             width: 350.0,
@@ -218,7 +243,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 10,
               ),
         Container(
             width: 350.0,
@@ -245,8 +270,10 @@ class _PinScreenState extends State<PinScreen> {
                     context,
                     MaterialPageRoute(builder: (context) => const SecondScreen()),
                   );
-                  print(name);
-                  print(mhr);
+
+                  //timestamp here
+                  //print(name);
+                  //print(mhr);
                 },
                 child: const Text('Continue',
                     style: TextStyle(
