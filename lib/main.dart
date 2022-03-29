@@ -98,6 +98,10 @@ class PinScreen extends StatefulWidget {
 
 class _PinScreenState extends State<PinScreen> {
   final PinDelay = 2;
+  String name = "No Value";
+  String mhr = "No Value";
+  String email = "No Value";
+  String pin = "No Value";
 
   @override
   void initState() {
@@ -153,12 +157,14 @@ class _PinScreenState extends State<PinScreen> {
                   border: OutlineInputBorder(),
                   hintText: 'Enter your name',
                 ),
+              onChanged: (value) => name = value,
               ),
         ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
               ),
+              //Text(text),
               const Text(
                 'Medical Health Record Number',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
@@ -175,6 +181,7 @@ class _PinScreenState extends State<PinScreen> {
                   border: OutlineInputBorder(),
                   hintText: 'Enter your MHR number',
                 ),
+              onChanged: (value) => mhr = value,
               ),
         ),
               SizedBox(
@@ -197,6 +204,7 @@ class _PinScreenState extends State<PinScreen> {
                   border: OutlineInputBorder(),
                   hintText: "Enter your doctor's email",
                 ),
+              onChanged: (value) => email = value,
               ),
         ),
               SizedBox(
@@ -219,6 +227,7 @@ class _PinScreenState extends State<PinScreen> {
                   border: OutlineInputBorder(),
                   hintText: 'Enter your PIN number',
                 ),
+              onChanged: (value) => pin = value,
               ),
         ),
               SizedBox(
@@ -236,6 +245,8 @@ class _PinScreenState extends State<PinScreen> {
                     context,
                     MaterialPageRoute(builder: (context) => const SecondScreen()),
                   );
+                  print(name);
+                  print(mhr);
                 },
                 child: const Text('Continue',
                     style: TextStyle(
@@ -286,13 +297,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              notificationAlert,
-            ),
-            Text(
-              messageTitle,
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            //Text(
+            //  notificationAlert,
+            //),
+            //Text(
+            //  messageTitle,
+            //  style: Theme.of(context).textTheme.headline4,
+            //),
             const Text(
               'Your current pH measurement is:',
               style: TextStyle(fontSize: 20),
@@ -549,8 +560,19 @@ class SecondScreen extends StatelessWidget {
     );
   }
 }
-class getHelp extends StatelessWidget {
+
+class getHelp extends StatefulWidget {
   const getHelp({Key? key}) : super(key: key);
+
+  @override
+  _getHelpState createState() => _getHelpState();
+}
+
+class _getHelpState extends State<getHelp> {
+//class getHelp extends StatelessWidget {
+ // const getHelp({Key? key}) : super(key: key);
+
+  String messagetodoctor = "No Value";
 
   @override
   Widget build(BuildContext context) {
@@ -579,6 +601,7 @@ class getHelp extends StatelessWidget {
                   border: OutlineInputBorder(),
                   hintText: 'Enter the message',
                 ),
+              onChanged: (value) => messagetodoctor = value,
               ),
         ),
               SizedBox(
@@ -691,6 +714,8 @@ class PhyAct extends StatefulWidget {
 
 class _PhyAct extends State<PhyAct> {
   String? _value;
+  String activitydescribed = "No Value";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -744,6 +769,7 @@ class _PhyAct extends State<PhyAct> {
                   border: OutlineInputBorder(),
                   hintText: 'Enter the activity',
                 ),
+              onChanged: (value) => activitydescribed = value,
               ),
         ),
               SizedBox(
@@ -807,8 +833,19 @@ class _PhyAct extends State<PhyAct> {
     );
   }
 }
-class MealInt extends StatelessWidget {
+
+class MealInt extends StatefulWidget {
   const MealInt({Key? key}) : super(key: key);
+
+  @override
+  _MealIntState createState() => _MealIntState();
+}
+
+class _MealIntState extends State<MealInt> {
+//class getHelp extends StatelessWidget {
+  // const getHelp({Key? key}) : super(key: key);
+
+  String mealdescribed = "No Value";
 
   @override
   Widget build(BuildContext context) {
@@ -837,6 +874,7 @@ class MealInt extends StatelessWidget {
                   border: OutlineInputBorder(),
                   hintText: 'Enter the meal',
                 ),
+              onChanged: (value) => mealdescribed = value,
               ),
         ),
               SizedBox(
@@ -895,8 +933,19 @@ class MealInt extends StatelessWidget {
     );
   }
 }
-class Sympt extends StatelessWidget {
+
+class Sympt extends StatefulWidget {
   const Sympt({Key? key}) : super(key: key);
+
+  @override
+  _SymptState createState() => _SymptState();
+}
+
+class _SymptState extends State<Sympt> {
+//class getHelp extends StatelessWidget {
+  // const getHelp({Key? key}) : super(key: key);
+
+  String symptomdescribed = "No Value";
 
   @override
   Widget build(BuildContext context) {
@@ -925,6 +974,7 @@ class Sympt extends StatelessWidget {
                   border: OutlineInputBorder(),
                   hintText: 'Enter the symptom',
                 ),
+              onChanged: (value) => symptomdescribed = value,
               ),
         ),
               SizedBox(
@@ -1013,6 +1063,7 @@ class Sympt extends StatelessWidget {
     );
   }
 }
+
 class ExplainSympts extends StatelessWidget {
   const ExplainSympts({Key? key}) : super(key: key);
 
