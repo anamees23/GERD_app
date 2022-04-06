@@ -35,6 +35,7 @@ dependencies:
   intl: ^0.15.7
   syncfusion_flutter_charts: ^18.4.49
   flutter_tts: ^3.3.3
+  image_picker: ^0.8.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

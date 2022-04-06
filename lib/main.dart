@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -19,6 +20,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
+
+import 'package:image_picker/image_picker.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -637,10 +640,14 @@ class getHelp extends StatefulWidget {
   _getHelpState createState() => _getHelpState();
 }
 
+enum ImageSourceType { gallery, camera }
 class _getHelpState extends State<getHelp> {
 //class getHelp extends StatelessWidget {
  // const getHelp({Key? key}) : super(key: key);
-
+  void _handleURLButtonPress(BuildContext context, var type) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ImageFromGalleryEx(type)));
+  }
   String messagetodoctor = "No Value";
 
   @override
@@ -664,7 +671,7 @@ class _getHelpState extends State<getHelp> {
                 height: 30,
               ),
         Container(
-            width: 500.0,
+            width: 350.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -677,19 +684,39 @@ class _getHelpState extends State<getHelp> {
                 //Use of SizedBox
                 height: 30,
               ),
-              // const Text(
-              //   'Click to add a photo',
-              //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-              //   textAlign: TextAlign.center,
-              // ),
-              // SizedBox(
-              //   //Use of SizedBox
-              //   height: 30,
-              // ),
+               const Text(
+                 'Click to add a photo',
+                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                 textAlign: TextAlign.center,
+               ),
+               SizedBox(
+                 //Use of SizedBox
+                 height: 10,
+               ),
               //
 
               // Code to add the photo
-
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.yellow.shade100,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  _handleURLButtonPress(context, ImageSourceType.gallery);
+                },
+                child: Text(
+                  "Pick Image from Gallery",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                ),
+              ),
+              ),
+              SizedBox(
+                //Use of SizedBox
+                height: 50,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
@@ -732,6 +759,81 @@ class _getHelpState extends State<getHelp> {
   }
 }
 
+class ImageFromGalleryEx extends StatefulWidget {
+  final type;
+  ImageFromGalleryEx(this.type);
+
+  @override
+  ImageFromGalleryExState createState() => ImageFromGalleryExState(this.type);
+}
+
+class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
+  var _image;
+  var imagePicker;
+  var type;
+
+  ImageFromGalleryExState(this.type);
+
+  @override
+  void initState() {
+    super.initState();
+    imagePicker = new ImagePicker();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text(type == ImageSourceType.camera
+              ? "Image from Camera"
+              : "Image from Gallery")),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 52,
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () async {
+                var source = type == ImageSourceType.camera
+                    ? ImageSource.camera
+                    : ImageSource.gallery;
+                XFile image = await imagePicker.pickImage(
+                    source: source, imageQuality: 50, preferredCameraDevice: CameraDevice.front);
+                setState(() {
+                  _image = File(image.path);
+                });
+              },
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                    color: Colors.red[200]),
+                child: _image != null
+                    ? Image.file(
+                  _image,
+                  width: 200.0,
+                  height: 200.0,
+                  fit: BoxFit.fitHeight,
+                )
+                    : Container(
+                  decoration: BoxDecoration(
+                      color: Colors.red[200]),
+                  width: 200,
+                  height: 200,
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: Colors.grey[800],
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
 class DataView extends StatefulWidget {
   _DataView createState() => _DataView();
 //const DataView ({Key? key}) : super(key: key);
