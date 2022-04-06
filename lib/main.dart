@@ -567,7 +567,12 @@ class _SecondScreenState extends State<SecondScreen> {
               height: 20,
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DataView()),
+    );
+              },
               child: Column(
                 children: <Widget>[
                   Icon(
