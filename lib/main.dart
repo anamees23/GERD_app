@@ -89,7 +89,6 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
 
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -296,7 +295,7 @@ class _PinScreenState extends State<PinScreen> {
 class _MyHomePageState extends State<MyHomePage> {
   String messageTitle = "Empty";
   String notificationAlert = "alert";
-
+  final FlutterTts flutterTts = FlutterTts();
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
@@ -313,7 +312,34 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    speak () async {
+      print(await flutterTts.getLanguages);
+      await flutterTts.setLanguage("en-Us");
+      await flutterTts.speak("Your current pH measurement is displayed below. What do you want to record? Physical Activity. Meal Intake. Unusual Symptoms.");
+    }
     return Scaffold(
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FloatingActionButton(
+            onPressed: () => speak(),
+            heroTag: null,
+            backgroundColor: Colors.redAccent,
+            child: const Icon(Icons.record_voice_over),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SecondScreen()),
+              );
+            },
+            heroTag: null,
+            child: const Icon(Icons.other_houses_rounded),
+          ),
+        ],
+      ),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -465,25 +491,39 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const SecondScreen()),
-          );
-        },
-        child: const Icon(Icons.other_houses_rounded),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => const SecondScreen()),
+      //     );
+      //   },
+      //   child: const Icon(Icons.other_houses_rounded),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 }
 
-class SecondScreen extends StatelessWidget {
+class SecondScreen extends StatefulWidget {
   const SecondScreen({Key? key}) : super(key: key);
 
   @override
+  _SecondScreenState createState() => _SecondScreenState();
+}
+
+class _SecondScreenState extends State<SecondScreen> {
+
+  final FlutterTts flutterTts = FlutterTts();
+  //const SecondScreen({Key? key}) : super(key: key);
+
+  @override
   Widget build(BuildContext context) {
+    speak () async {
+      print(await flutterTts.getLanguages);
+      await flutterTts.setLanguage("en-Us");
+      await flutterTts.speak("Welcome to My GERD Tracker! Submit Current Status. View My Data. Ask for Help.");
+    }
     return Scaffold(
       body: Center(
         child: Column(
@@ -506,9 +546,6 @@ class SecondScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Measuring')),
                 );
-
-
-
 
               },
               child: Column(
@@ -586,6 +623,7 @@ class SecondScreen extends StatelessWidget {
     );
   }
 }
+
 
 class getHelp extends StatefulWidget {
   const getHelp({Key? key}) : super(key: key);
@@ -740,12 +778,25 @@ class BravoData {
   late final double BravoTime;
   late final double BravopH;
 }
-
-class ThirdScreen extends StatelessWidget {
+class ThirdScreen extends StatefulWidget {
   const ThirdScreen({Key? key}) : super(key: key);
 
   @override
+  _ThirdScreenState createState() => _ThirdScreenState();
+}
+
+class _ThirdScreenState extends State<ThirdScreen> {
+
+  final FlutterTts flutterTts = FlutterTts();
+  //const ThirdScreen({Key? key}) : super(key: key);
+
+  @override
   Widget build(BuildContext context) {
+    speak () async {
+      print(await flutterTts.getLanguages);
+      await flutterTts.setLanguage("en-Us");
+      await flutterTts.speak("To submit your activity status, meal status, or to record any unusual symptoms, click on the Submit Current Status icon on the home page. To read aloud the text on any page, click the red icon that depicts a person speaking.");
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Instructions'),
