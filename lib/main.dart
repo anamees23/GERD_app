@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
+
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+
 //import 'LocalNotificationsScreen.dart'
 //import 'package:intl/intl.dart';
 
@@ -298,12 +303,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-
-
-
-
-
   }
 
   @override
@@ -635,15 +634,16 @@ class _getHelpState extends State<getHelp> {
                 //Use of SizedBox
                 height: 30,
               ),
-              const Text(
-                'Click to add a photo',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                //Use of SizedBox
-                height: 30,
-              ),
+              // const Text(
+              //   'Click to add a photo',
+              //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+              //   textAlign: TextAlign.center,
+              // ),
+              // SizedBox(
+              //   //Use of SizedBox
+              //   height: 30,
+              // ),
+              //
 
               // Code to add the photo
 
@@ -687,6 +687,58 @@ class _getHelpState extends State<getHelp> {
       ),
     );
   }
+}
+
+class DataView extends StatefulWidget {
+  _DataView createState() => _DataView();
+//const DataView ({Key? key}) : super(key: key);
+}
+
+class _DataView extends State<DataView> {
+
+
+  late List<BravoData> _chartData;
+
+  @override
+  void initState() {
+    _chartData = getChartData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return SafeArea(
+        child: Scaffold(
+          body: SfCartesianChart(series: <ChartSeries>[
+            LineSeries<BravoData, double>(dataSource: _chartData,
+                xValueMapper: (BravoData bravo, _) => bravo.BravoTime,
+                yValueMapper: (BravoData bravo, _) => bravo.BravopH)
+          ]),));
+
+  }
+
+  List<BravoData> getChartData(){
+    final List<BravoData> chartData = [
+      BravoData(2, 5.1),
+      BravoData(3, 4.2),
+      BravoData(4, 5.6),
+      BravoData(5, 5.3),
+      BravoData(6, 4.5),
+      BravoData(7, 4.0),
+      BravoData(8, 4.7),
+      BravoData(9, 4.4),
+      BravoData(10, 5.4)
+    ];
+    return chartData;
+  }
+
+}
+
+class BravoData {
+  BravoData(this.BravoTime, this.BravopH);
+  late final double BravoTime;
+  late final double BravopH;
 }
 
 class ThirdScreen extends StatelessWidget {
@@ -814,11 +866,6 @@ class _PhyAct extends State<PhyAct> {
               ),
 
               // Input date and time here
-
-              SizedBox(
-                //Use of SizedBox
-                height: 30,
-              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
@@ -828,18 +875,41 @@ class _PhyAct extends State<PhyAct> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AllSet()),
+                    MaterialPageRoute(builder: (context) => HomeScreenBlue()),
                   );
                 },
-                child: const Text('Submit',
+                child: const Text('Enter Time of Activity',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
                     )),
               ),
+
               SizedBox(
                 //Use of SizedBox
                 height: 30,
               ),
+              //ElevatedButton(
+               // style: ElevatedButton.styleFrom(
+                //  primary: Colors.blue,
+                  //shape: StadiumBorder(),
+                  //fixedSize: const Size(240, 80),
+                //),
+                //onPressed: () {
+                  //Navigator.push(
+                    //context,
+                    //MaterialPageRoute(builder: (context) => const AllSet()),
+                  //);
+                //},
+                //child: const Text('Submit',
+                  //  style: TextStyle(
+                    //  fontSize: 20,
+                    //)),
+              //),
+              //SizedBox(
+                //Use of SizedBox
+                //height: 30,
+              //),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
@@ -886,7 +956,7 @@ class _MealIntState extends State<MealInt> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'Meal',
+                'Meal (Food or Drink)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
@@ -928,10 +998,11 @@ class _MealIntState extends State<MealInt> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AllSet()),
+                    MaterialPageRoute(builder: (context) => HomeScreenGreen()),
                   );
                 },
-                child: const Text('Submit',
+                child: const Text('Enter Time of Meal',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
                     )),
@@ -940,6 +1011,28 @@ class _MealIntState extends State<MealInt> {
                 //Use of SizedBox
                 height: 30,
               ),
+
+              // ElevatedButton(
+              //   style: ElevatedButton.styleFrom(
+              //     primary: Colors.green,
+              //     shape: StadiumBorder(),
+              //     fixedSize: const Size(240, 80),
+              //   ),
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => const AllSet()),
+              //     );
+              //   },
+              //   child: const Text('Submit',
+              //       style: TextStyle(
+              //         fontSize: 20,
+              //       )),
+              // ),
+              // SizedBox(
+              //   //Use of SizedBox
+              //   height: 30,
+              // ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.green,
@@ -1058,14 +1151,33 @@ class _SymptState extends State<Sympt> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AllSet()),
+                    MaterialPageRoute(builder: (context) => HomeScreenPink()),
                   );
                 },
-                child: const Text('Submit',
+                child: const Text('Enter Time of Symptom',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                     )),
               ),
+
+              // ElevatedButton(
+              //   style: ElevatedButton.styleFrom(
+              //     primary: Colors.pink,
+              //     shape: StadiumBorder(),
+              //     fixedSize: const Size(240, 80),
+              //   ),
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => const AllSet()),
+              //     );
+              //   },
+              //   child: const Text('Submit',
+              //       style: TextStyle(
+              //         fontSize: 20,
+              //       )),
+              // ),
               SizedBox(
                 //Use of SizedBox
                 height: 30,
@@ -1231,6 +1343,914 @@ class AllSet extends StatelessWidget {
                     )),
               ),
             ]
+        ),
+      ),
+    );
+  }
+}
+
+class HomeScreenBlue extends StatefulWidget {
+  @override
+  _HomeScreenBlueState createState() => _HomeScreenBlueState();
+}
+
+class _HomeScreenBlueState extends State<HomeScreenBlue> {
+  String _date = "Not set";
+  String _time = "Not set";
+  late DateTime DoingNow;
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Select Date and Time'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // ignore: deprecated_member_use
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                elevation: 5.0,
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      theme: DatePickerTheme(
+                        containerHeight: 210.0,
+                      ),
+                      showTitleActions: true,
+                      minTime: DateTime(2022, 1, 1),
+                      maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
+                        print('confirm $date');
+                        _date = '${date.year} - ${date.month} - ${date.day}';
+                        setState(() {});
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 45.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.date_range,
+                                  size: 18.0,
+                                  color: Colors.blue,
+                                ),
+                                Text(
+                                  " $_date",
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "  Click to change",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.white,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              // ignore: deprecated_member_use
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                elevation: 5.0,
+                onPressed: () {
+                  DatePicker.showTimePicker(context,
+                      theme: DatePickerTheme(
+                        containerHeight: 210.0,
+                      ),
+                      showTitleActions: true, onConfirm: (time) {
+                        print('confirm $time');
+                        _time = '${time.hour} : ${time.minute}';
+                        setState(() {});
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                  setState(() {});
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 45.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.access_time,
+                                  size: 18.0,
+                                  color: Colors.blue,
+                                ),
+                                Text(
+                                  " $_time",
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "  Click to change",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.white,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 100),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CurrentlyDoingTimeActivity()),
+                  );
+                  DoingNow = DateTime.now();
+                },
+                child: const Text('or Currently Doing!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 100),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllSet()),
+                  );
+                },
+                child: const Text('Submit',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              )
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+class CurrentlyDoingTimeActivity extends StatefulWidget {
+  @override
+  _CurrentlyDoingTimeActivity createState() => _CurrentlyDoingTimeActivity();
+}
+
+class _CurrentlyDoingTimeActivity extends State<CurrentlyDoingTimeActivity> {
+  String _time = "Not set";
+  late DateTime DoingNow;
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Input Estimated Time'),
+        ),
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'Please input the estimated time that you think you will take to complete this activity',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 100),
+                    ),
+                    Container(
+                      child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            // ignore: deprecated_member_use
+
+                            RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              elevation: 5.0,
+                              onPressed: () {
+                                DatePicker.showTimePicker(context,
+                                    theme: DatePickerTheme(
+                                      containerHeight: 210.0,
+                                    ),
+                                    showTitleActions: true, onConfirm: (time) {
+                                      print('confirm $time');
+                                      _time = '${time.hour} : ${time.minute}';
+                                      setState(() {});
+                                    }, currentTime: DateTime.now(), locale: LocaleType.en);
+                                setState(() {});
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 45.0,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Container(
+                                          child: Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.access_time,
+                                                size: 18.0,
+                                                color: Colors.blue,
+                                              ),
+                                              Text(
+                                                " $_time",
+                                                style: TextStyle(
+                                                    color: Colors.blue,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18.0),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Text(
+                                      "  Click to change",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 100),
+                            ),
+                            SizedBox(
+                              //Use of SizedBox
+                              height: 30,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.blue,
+                                shape: StadiumBorder(),
+                                fixedSize: const Size(240, 80),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => HomeScreenBlue()),
+                                );
+                              },
+                              child: const Text('Back',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  )),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 100),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.blue,
+                                shape: StadiumBorder(),
+                                fixedSize: const Size(240, 80),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const AllSet()),
+                                );
+                              },
+                              child: const Text('Submit',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  )),
+                            )
+                          ]
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        )
+    );
+  }
+}
+
+
+
+class HomeScreenGreen extends StatefulWidget {
+  @override
+  _HomeScreenGreenState createState() => _HomeScreenGreenState();
+}
+
+class _HomeScreenGreenState extends State<HomeScreenGreen> {
+  String _date = "Not set";
+  String _time = "Not set";
+  late DateTime DoingNow;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Select Date and Time'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // ignore: deprecated_member_use
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                elevation: 5.0,
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      theme: DatePickerTheme(
+                        containerHeight: 210.0,
+                      ),
+                      showTitleActions: true,
+                      minTime: DateTime(2022, 1, 1),
+                      maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
+                        print('confirm $date');
+                        _date = '${date.year} - ${date.month} - ${date.day}';
+                        setState(() {});
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 45.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.date_range,
+                                  size: 18.0,
+                                  color: Colors.green,
+                                ),
+                                Text(
+                                  " $_date",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "  Click to change",
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.white,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              // ignore: deprecated_member_use
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                elevation: 5.0,
+                onPressed: () {
+                  DatePicker.showTimePicker(context,
+                      theme: DatePickerTheme(
+                        containerHeight: 210.0,
+                      ),
+                      showTitleActions: true, onConfirm: (time) {
+                        print('confirm $time');
+                        _time = '${time.hour} : ${time.minute}';
+                        setState(() {});
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                  setState(() {});
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 45.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.access_time,
+                                  size: 18.0,
+                                  color: Colors.green,
+                                ),
+                                Text(
+                                  " $_time",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "  Click to change",
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.white,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 100),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CurrentlyDoingTimeMeal()),
+                  );
+                  DoingNow = DateTime.now();
+                },
+                child: const Text('or Currently Eating/Drinking!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 100),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllSet()),
+                  );
+                },
+                child: const Text('Submit',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              )
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CurrentlyDoingTimeMeal extends StatefulWidget {
+  @override
+  _CurrentlyDoingTimeMeal createState() => _CurrentlyDoingTimeMeal();
+}
+
+class _CurrentlyDoingTimeMeal extends State<CurrentlyDoingTimeMeal> {
+  String _time = "Not set";
+  late DateTime DoingNow;
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Input Estimated Time'),
+        ),
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'Please input the estimated time that you think you will take to complete your meal',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 100),
+                    ),
+                    Container(
+                      child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            // ignore: deprecated_member_use
+
+                            RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              elevation: 5.0,
+                              onPressed: () {
+                                DatePicker.showTimePicker(context,
+                                    theme: DatePickerTheme(
+                                      containerHeight: 210.0,
+                                    ),
+                                    showTitleActions: true, onConfirm: (time) {
+                                      print('confirm $time');
+                                      _time = '${time.hour} : ${time.minute}';
+                                      setState(() {});
+                                    }, currentTime: DateTime.now(), locale: LocaleType.en);
+                                setState(() {});
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 45.0,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Container(
+                                          child: Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.access_time,
+                                                size: 18.0,
+                                                color: Colors.green,
+                                              ),
+                                              Text(
+                                                " $_time",
+                                                style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18.0),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Text(
+                                      "  Click to change",
+                                      style: TextStyle(
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 100),
+                            ),
+                            SizedBox(
+                              //Use of SizedBox
+                              height: 30,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.green,
+                                shape: StadiumBorder(),
+                                fixedSize: const Size(240, 80),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => HomeScreenBlue()),
+                                );
+                              },
+                              child: const Text('Back',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  )),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 100),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.green,
+                                shape: StadiumBorder(),
+                                fixedSize: const Size(240, 80),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const AllSet()),
+                                );
+                              },
+                              child: const Text('Submit',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  )),
+                            )
+                          ]
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        )
+    );
+  }
+}
+
+
+//@override List<int> layoutProportions() => [100, 100, 1];
+
+class HomeScreenPink extends StatefulWidget {
+  @override
+  _HomeScreenPinkState createState() => _HomeScreenPinkState();
+}
+
+class _HomeScreenPinkState extends State<HomeScreenPink> {
+  String _date = "Not set";
+  String _time = "Not set";
+  late DateTime DoingNow;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Select Date and Time'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // ignore: deprecated_member_use
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                elevation: 5.0,
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      theme: DatePickerTheme(
+                        containerHeight: 210.0,
+                      ),
+                      showTitleActions: true,
+                      minTime: DateTime(2022, 1, 1),
+                      maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
+                        print('confirm $date');
+                        _date = '${date.year} - ${date.month} - ${date.day}';
+                        setState(() {});
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 45.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.date_range,
+                                  size: 18.0,
+                                  color: Colors.pink,
+                                ),
+                                Text(
+                                  " $_date",
+                                  style: TextStyle(
+                                      color: Colors.pink,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "  Click to change",
+                        style: TextStyle(
+                            color: Colors.pink,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.white,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              // ignore: deprecated_member_use
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                elevation: 5.0,
+                onPressed: () {
+                  DatePicker.showTimePicker(context,
+                      theme: DatePickerTheme(
+                        containerHeight: 210.0,
+                      ),
+                      showTitleActions: true, onConfirm: (time) {
+                        print('confirm $time');
+                        _time = '${time.hour} : ${time.minute}';
+                        setState(() {});
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                  setState(() {});
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 45.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.access_time,
+                                  size: 18.0,
+                                  color: Colors.pink,
+                                ),
+                                Text(
+                                  " $_time",
+                                  style: TextStyle(
+                                      color: Colors.pink,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "  Click to change",
+                        style: TextStyle(
+                            color: Colors.pink,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.white,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 100),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllSet()),
+                  );
+                  DoingNow = DateTime.now();
+                },
+                child: const Text('or Currently Experiencing!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 100),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.pink,
+                  shape: StadiumBorder(),
+                  fixedSize: const Size(240, 80),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllSet()),
+                  );
+                },
+                child: const Text('Submit',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              )
+
+            ],
+          ),
         ),
       ),
     );
