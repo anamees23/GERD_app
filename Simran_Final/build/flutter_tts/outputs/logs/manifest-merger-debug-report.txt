@@ -1,0 +1,27 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:1:1-8:12
+	package
+		ADDED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:2:3-38
+		INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml
+		INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:1:11-69
+queries
+ADDED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:3:5-7:15
+intent#action:name:android.intent.action.TTS_SERVICE
+ADDED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:4:9-6:18
+action#android.intent.action.TTS_SERVICE
+ADDED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:5:13-72
+	android:name
+		ADDED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml:5:21-69
+uses-sdk
+INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml
+INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml
+		ADDED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml
+		INJECTED from /usr/local/Caskroom/flutter/2.8.1/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.3.3/android/src/main/AndroidManifest.xml

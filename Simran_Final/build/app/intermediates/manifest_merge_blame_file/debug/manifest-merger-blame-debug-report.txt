@@ -1,0 +1,69 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.time_integration"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="31" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/simransokhi/AndroidStudioProjects/Simran_Final/android/app/src/debug/AndroidManifest.xml:6:5-66
+14-->/Users/simransokhi/AndroidStudioProjects/Simran_Final/android/app/src/debug/AndroidManifest.xml:6:22-64
+15
+16    <queries>
+16-->[:flutter_tts] /Users/simransokhi/AndroidStudioProjects/Simran_Final/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-11:15
+17        <intent>
+17-->[:flutter_tts] /Users/simransokhi/AndroidStudioProjects/Simran_Final/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-10:18
+18            <action android:name="android.intent.action.TTS_SERVICE" />
+18-->[:flutter_tts] /Users/simransokhi/AndroidStudioProjects/Simran_Final/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-72
+18-->[:flutter_tts] /Users/simransokhi/AndroidStudioProjects/Simran_Final/build/flutter_tts/intermediates/library_manifest/debug/AndroidManifest.xml:9:21-69
+19        </intent>
+20    </queries>
+21
+22    <application
+23        android:name="android.app.Application"
+24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+24-->[androidx.core:core:1.6.0] /Users/simransokhi/.gradle/caches/transforms-2/files-2.1/5f663b08eec19eef9a9d1af662d9025e/core-1.6.0/AndroidManifest.xml:24:18-86
+25        android:debuggable="true"
+26        android:icon="@mipmap/ic_launcher"
+27        android:label="Simran_Final" >
+28        <activity
+29            android:name="com.example.time_integration.MainActivity"
+30            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+31            android:exported="true"
+32            android:hardwareAccelerated="true"
+33            android:launchMode="singleTop"
+34            android:theme="@style/LaunchTheme"
+35            android:windowSoftInputMode="adjustResize" >
+36
+37            <!--
+38                 Specifies an Android theme to apply to this Activity as soon as
+39                 the Android process has started. This theme is visible to the user
+40                 while the Flutter UI initializes. After that, this theme continues
+41                 to determine the Window background behind the Flutter UI.
+42            -->
+43            <meta-data
+44                android:name="io.flutter.embedding.android.NormalTheme"
+45                android:resource="@style/NormalTheme" />
+46
+47            <intent-filter>
+48                <action android:name="android.intent.action.MAIN" />
+49
+50                <category android:name="android.intent.category.LAUNCHER" />
+51            </intent-filter>
+52        </activity>
+53        <!--
+54             Don't delete the meta-data below.
+55             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+56        -->
+57        <meta-data
+58            android:name="flutterEmbedding"
+59            android:value="2" />
+60    </application>
+61
+62</manifest>
