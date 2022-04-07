@@ -152,7 +152,7 @@ class _PinScreenState extends State<PinScreen> {
             children: <Widget>[
               const Text(
                 'First Name',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -161,6 +161,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
         Container(
             width: 350.0,
+            height: 50.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -171,12 +172,12 @@ class _PinScreenState extends State<PinScreen> {
         ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 20,
               ),
               //Text(text),
               const Text(
                 'Last Name',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -185,6 +186,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
               Container(
                 width: 350.0,
+                height: 50.0,
                 child:TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -195,11 +197,11 @@ class _PinScreenState extends State<PinScreen> {
               ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 20,
               ),
               const Text(
                 'Medical Health Record Number',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -208,6 +210,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
         Container(
             width: 350.0,
+            height: 50.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -218,11 +221,11 @@ class _PinScreenState extends State<PinScreen> {
         ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 20,
               ),
               const Text(
                 'Doctor email',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -231,6 +234,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
         Container(
             width: 350.0,
+            height: 50.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -241,11 +245,11 @@ class _PinScreenState extends State<PinScreen> {
         ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 20,
               ),
               const Text(
                 'Pin number',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -254,6 +258,7 @@ class _PinScreenState extends State<PinScreen> {
               ),
         Container(
             width: 350.0,
+            height: 50.0,
             child:TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -264,13 +269,13 @@ class _PinScreenState extends State<PinScreen> {
         ),
               SizedBox(
                 //Use of SizedBox
-                height: 30,
+                height: 20,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
                   shape: StadiumBorder(),
-                  fixedSize: const Size(240, 80),
+                  fixedSize: const Size(240, 60),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -828,7 +833,27 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                 ),
               ),
             ),
-          )
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue,
+              shape: StadiumBorder(),
+              fixedSize: const Size(240, 80),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const getHelp()),
+              );
+            },
+            child: const Text('Submit image',
+                style: TextStyle(
+                  fontSize: 20,
+                )),
+          ),
         ],
       ),
     );
