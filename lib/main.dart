@@ -846,7 +846,7 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const getHelp()),
+                MaterialPageRoute(builder: (context) => const AllSet()),
               );
             },
             child: const Text('Submit image',
