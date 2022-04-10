@@ -7,8 +7,14 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
+import 'db/databases.dart';
+import 'dart:convert';
+import 'dart:ui';
+import 'dart:math';
+import 'package:sqflite/sqflite.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 //import 'LocalNotificationsScreen.dart'
-//import 'package:intl/intl.dart';
 
 // Choice #1 for notifications
 //import 'package:awesome_notifications/awesome_notifications.dart';
@@ -525,6 +531,52 @@ class _SecondScreenState extends State<SecondScreen> {
   final FlutterTts flutterTts = FlutterTts();
   //const SecondScreen({Key? key}) : super(key: key);
 
+  var _pH1 = 0.0;
+  var _pH2 = 0.0;
+  bool _isButtonDisabled = false;
+  DateTime currentDate1 = DateTime.now();
+  DateTime currentDate2 = DateTime.now();
+  String currentDate2String = "";
+  String currentDate1String = "";
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+
+  @override
+  void initState() {
+    _isButtonDisabled = false;
+    super.initState();
+    const oneSec = const Duration(seconds: 10);
+    Timer _timer = new Timer.periodic(oneSec, (timer) {
+      if (_isButtonDisabled == true) {
+        timer.cancel();
+      }
+      var rng = Random();
+      setState(() {
+        _pH1 = rng.nextInt(140) / 10.0;
+        _pH2 = rng.nextInt(140) / 10.0;
+        _timeSync();
+      });
+    });
+  }
+
+  void _timeSync() async {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen
+      currentDate2 = DateTime.now();
+      currentDate1 = currentDate2.add(const Duration(seconds: -5)); //DateTime
+      currentDate2String = dateFormat.format(currentDate2);
+      currentDate1String = dateFormat.format(currentDate1);
+    });
+
+    ph_data new_pH1 = new ph_data(_pH1, currentDate1String);
+    ph_data new_pH2 = new ph_data(_pH2, currentDate2String);
+    new_pH1.insert_ph_data(new_pH1);
+    new_pH2.insert_ph_data(new_pH2);
+  }
+
   @override
   Widget build(BuildContext context) {
     speak () async {
@@ -859,6 +911,7 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
     );
   }
 }
+
 class DataView extends StatefulWidget {
   _DataView createState() => _DataView();
 //const DataView ({Key? key}) : super(key: key);
@@ -866,87 +919,114 @@ class DataView extends StatefulWidget {
 
 class _DataView extends State<DataView> {
 
-
-  late List<BravoData> _chartData;
+  List<BravoData>? _chartData;
+  bool _isUpdating = true;
 
   @override
   void initState() {
-    _chartData = getChartData();
-    super.initState();
+  //_chartData = getChartData();
+    //convertChartData();
+  super.initState();
+  convertChartData().whenComplete((){
+    if (mounted) {
+      setState(() {});}
+  });
+  const updateTime = const Duration(seconds: 10);
+  Timer _chartTimer = new Timer.periodic(updateTime, (chartTimer) {
+      if (_isUpdating == false) {
+        chartTimer.cancel();
+      }
+      convertChartData().whenComplete((){
+    if (mounted) {
+      setState(() {});}
+      });
+  });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
+      return Scaffold(
         appBar: AppBar(
           title: const Text('View my Data'),
           backgroundColor: Colors.deepPurpleAccent,
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                // height of the Container widget
-                height: 580,
-                // width of the Container widget
-                //width: 400,
-                child: SfCartesianChart(plotAreaBorderWidth: 0,
-                    margin: EdgeInsets.fromLTRB(10,10,20,70),
-                    series: <ChartSeries>[
-                      LineSeries<BravoData, double>(dataSource: _chartData,
-                          xValueMapper: (BravoData bravo, _) => bravo.BravoTime,
-                          yValueMapper: (BravoData bravo, _) => bravo.BravopH)
-                    ]),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+          Container(
+          // height of the Container widget
+          height: 580,
+          // width of the Container widget
+          //width: 400,
+          child: SfCartesianChart(
+            primaryXAxis: CategoryAxis(
+                            // Axis labels will be placed in multiple rows, if it is intersected
+                            labelIntersectAction: AxisLabelIntersectAction.multipleRows
+                        ),
+                        plotAreaBorderWidth: 0,
+              margin: EdgeInsets.fromLTRB(10,10,20,70),
+              series: <ChartSeries>[
+                LineSeries<BravoData, String>(dataSource: _chartData,
+                    xValueMapper: (BravoData bravo, _) => bravo.BravoTime,
+                    yValueMapper: (BravoData bravo, _) => bravo.BravopH)
+              ]),
+        ),
+            SizedBox(
+              //Use of SizedBox
+              height: 30,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.deepPurpleAccent,
+                shape: StadiumBorder(),
+                fixedSize: const Size(240, 80),
               ),
-              SizedBox(
-                //Use of SizedBox
-                height: 30,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurpleAccent,
-                  shape: StadiumBorder(),
-                  fixedSize: const Size(240, 80),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Back',
-                    style: TextStyle(
-                      fontSize: 20,
-                    )),
-              ),
-            ],
-          ),
-        )
-    );
+              onPressed: () {
+                _isUpdating = false;
+                Navigator.pop(context);
+              },
+              child: const Text('Back',
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
+            ),
+    ],
+    ),
+
+    )
+      );
 
   }
 
-  List<BravoData> getChartData(){
-    final List<BravoData> chartData = [
-      BravoData(2, 5.1),
-      BravoData(3, 4.2),
-      BravoData(4, 5.6),
-      BravoData(5, 5.3),
-      BravoData(6, 4.5),
-      BravoData(7, 4.0),
-      BravoData(8, 4.7),
-      BravoData(9, 4.4),
-      BravoData(10, 5.4)
-    ];
+  Future<List<BravoData>> getChartData() async{
+    ph_data new_pH1 = new ph_data(0, '');
+    List ph_data_list = await new_pH1.retrieve_ph_data();
+    List ph_values = List.filled(ph_data_list.length, 0.0, growable: false);
+    List time_values = List.filled(ph_data_list.length, '', growable: false);
+    final List<BravoData> chartData = List.filled(ph_data_list.length, new BravoData('', 0.0), growable: false);
+    for (var i = 0; i<ph_data_list.length; i++) {
+      ph_values[i] = ph_data_list[i].ph_value;
+      time_values[i] = ph_data_list[i].time_stamp.split(' ')[1];
+      chartData[i] =
+          BravoData(ph_data_list[i].time_stamp.split(' ')[1], ph_data_list[i].ph_value);
+    }
+
     return chartData;
+  }
+
+  Future<void> convertChartData() async{
+    _chartData = await getChartData();
   }
 
 }
 
 class BravoData {
   BravoData(this.BravoTime, this.BravopH);
-  late final double BravoTime;
+  late final String BravoTime;
   late final double BravopH;
 }
+
 class ThirdScreen extends StatefulWidget {
   const ThirdScreen({Key? key}) : super(key: key);
 
