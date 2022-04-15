@@ -544,7 +544,7 @@ class _SecondScreenState extends State<SecondScreen> {
   void initState() {
     _isButtonDisabled = false;
     super.initState();
-    const oneSec = const Duration(seconds: 10);
+    const oneSec = const Duration(seconds: 120);
     Timer _timer = new Timer.periodic(oneSec, (timer) {
       if (_isButtonDisabled == true) {
         timer.cancel();
@@ -566,7 +566,7 @@ class _SecondScreenState extends State<SecondScreen> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen
       currentDate2 = DateTime.now();
-      currentDate1 = currentDate2.add(const Duration(seconds: -5)); //DateTime
+      currentDate1 = currentDate2.add(const Duration(seconds: -60)); //DateTime
       currentDate2String = dateFormat.format(currentDate2);
       currentDate1String = dateFormat.format(currentDate1);
     });
@@ -2934,7 +2934,7 @@ class _HomeScreenPinkState extends State<HomeScreenPink> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const CurrentlyExperiencingSymptom()),
+                    MaterialPageRoute(builder: (context) => CurrentlyExperiencingSymptom()),
                   );
                   DoingNow = DateTime.now();
                 },
